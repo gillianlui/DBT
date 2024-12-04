@@ -1,13 +1,6 @@
 version: 2
 
 models:
-  - name: customers
-    columns:
-      - name: customer_id
-        tests:
-          - unique
-          - not_null
-
   - name: stg_customers
     columns:
       - name: customer_id
@@ -31,3 +24,11 @@ models:
           - relationships:
               to: ref('stg_customers')
               field: customer_id
+
+  - name: stg_stripe_payments
+    columns:
+      - name: orderid
+        tests:
+          - relationships:
+              to: ref('stg_orders')
+              field: order_id
