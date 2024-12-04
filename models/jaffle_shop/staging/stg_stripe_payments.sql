@@ -1,1 +1,1 @@
-select * from stripe.payment
+select * from {{ source('stripe', 'payment') }}

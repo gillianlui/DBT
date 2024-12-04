@@ -1,6 +1,7 @@
 select
     cust.customer_id
     ,ord.order_id
+    ,ord.order_date
     ,pay.amount
 from {{ref("stg_customers")}} cust
 join {{ref("stg_orders")}} ord

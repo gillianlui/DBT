@@ -1,0 +1,19 @@
+version: 2
+
+sources:
+  - name: jaffle_shop
+    database: dbtworkshop
+    schema: jaffle_shop
+    tables:
+      - name: customers
+      - name: orders
+        loaded_at_field: _etl_loaded_at
+        freshness:
+          error_after: {count: 200, period: day}
+          warn_after: {count: 1, period: day}
+
+  - name: stripe
+    database: dbtworkshop
+    schema: stripe
+    tables:
+      - name: payment 
