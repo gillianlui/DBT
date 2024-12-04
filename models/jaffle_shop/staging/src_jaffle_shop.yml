@@ -2,16 +2,20 @@ version: 2
 
 sources:
   - name: jaffle_shop
+    description: A clone of a Postgres application database.
     database: dbtworkshop
     schema: jaffle_shop
     tables:
       - name: customers
+        description: Raw customers data.
         columns:
           - name: id
+            description: Primary key for customers.
             tests:
               - not_null
               - unique
       - name: orders
+        description: Primary key for orders
         loaded_at_field: _etl_loaded_at
         freshness:
           error_after: { count: 200, period: day }

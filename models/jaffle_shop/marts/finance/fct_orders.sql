@@ -1,3 +1,8 @@
+{{
+  config(
+    materialized='table'
+  )
+}}
 select
     cust.customer_id
     ,ord.order_id
