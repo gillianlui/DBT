@@ -1,0 +1,38 @@
+version: 2
+
+models:
+  - name: stg_customers
+    description: Staging for Customer table
+    columns:
+      - name: customer_id
+        tests:
+          - unique
+          - not_null
+
+  - name: stg_orders
+    description: Staging for Orders
+    columns:
+      - name: order_id
+        tests:
+          - unique
+          - not_null
+      - name: status
+        description: '{{ doc("order_status") }}'
+        tests:
+          - accepted_values:
+              values: ['placed', 'shipped', 'completed', 'return_pending', 'returned']
+      - name: customer_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_customers')
+              field: customer_id
+
+  - name: stg_stripe_payments
+    description: Payment that is linked to order
+    columns:
+      - name: orderid
+        tests:
+          - relationships:
+              to: ref('stg_orders')
+              field: order_id
